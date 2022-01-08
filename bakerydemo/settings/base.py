@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     "wagtail.contrib.simple_translation",
     "wagtail.contrib.styleguide",
     "wagtail",
+    "grapple",
+    "graphene_django",
     "rest_framework",
     "modelcluster",
     "taggit",
@@ -202,3 +204,13 @@ WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
 ]
 
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "changeme")
+GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
+GRAPPLE = {
+    "APPS": [
+        'base',
+        'blog',
+        'breads',
+        'locations',
+    ],
+    "EXPOSE_GRAPHIQL": True,
+}

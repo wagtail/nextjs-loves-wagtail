@@ -12,6 +12,9 @@ from wagtail.fields import StreamField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
 
+from grapple.models import GraphQLString, GraphQLStreamfield, GraphQLImage, GraphQLTag
+
+
 from bakerydemo.base.blocks import BaseStreamBlock
 
 
@@ -86,6 +89,15 @@ class BlogPage(Page):
         FieldPanel("tags"),
     ]
 
+    graphql_fields = [
+        GraphQLString("introduction"),
+        GraphQLImage("image"),
+        GraphQLStreamfield("body"),
+        GraphQLString("subtitle"),
+        GraphQLTag("tags"),
+        GraphQLString("date_published"),
+    ]
+
     search_fields = Page.search_fields + [
         index.SearchField("body"),
     ]
@@ -152,8 +164,13 @@ class BlogIndexPage(RoutablePageMixin, Page):
         FieldPanel("image"),
     ]
 
-    # Specifies that only BlogPage objects can live under this index page
-    subpage_types = ["BlogPage"]
+    graphql_fields = [
+        GraphQLString("introduction"),
+        GraphQLImage("image"),
+    ]
+
+    # Speficies that only BlogPage objects can live under this index page
+    subpage_types = ['BlogPage']
 
     # Defines a method to access the children of the page (e.g. BlogPage
     # objects). On the demo site we use this on the HomePage

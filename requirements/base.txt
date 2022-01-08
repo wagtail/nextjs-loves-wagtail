@@ -5,3 +5,4 @@ wagtail-font-awesome-svg>=0.0.3,<1
 django-debug-toolbar>=3.2,<4
 django-extensions==3.2.1
 dj-database-url==0.4.1
+wagtail-grapple@git+https://github.com/torchbox/wagtail-grapple.git@main#egg=wagtail-grapple
