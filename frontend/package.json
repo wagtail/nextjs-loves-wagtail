@@ -10,10 +10,12 @@
     "format": "prettier --write \"**/?(.)*.{css,js,json,ts,tsx,yaml,yml}\""
   },
   "dependencies": {
+    "@apollo/client": "^3.7.14",
     "@types/node": "20.2.4",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "graphql": "^16.6.0",
     "next": "13.4.4",
     "postcss": "8.4.23",
     "react": "18.2.0",
