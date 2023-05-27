@@ -1,12 +1,14 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-export function getGraphQLHost() {
+export function getHostOrigin() {
   const gitpodUrl = new URL(process.env.GITPOD_WORKSPACE_URL as string);
   const port = 8080;
-  const path = '/api/graphql/';
   gitpodUrl.hostname = `${port}-${gitpodUrl.hostname}`;
-  gitpodUrl.pathname = path;
-  return gitpodUrl.toString();
+  return gitpodUrl.origin;
+}
+
+export function getGraphQLHost() {
+  return `${getHostOrigin()}/api/graphql/`;
 }
 
 export const client = new ApolloClient({
