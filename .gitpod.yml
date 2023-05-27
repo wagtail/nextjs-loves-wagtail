@@ -3,6 +3,8 @@ image:
 ports:
   - port: 8080
     onOpen: open-preview
+    # Set to public to allow Next.js to fetch data from Wagtail
+    visibility: public
   - port: 3000
     onOpen: open-browser
 tasks:
