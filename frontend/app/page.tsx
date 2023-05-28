@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
-import { client, getHostOrigin } from '@/lib/graphql';
+import { client } from '@/lib/graphql';
 
 export default async function Home() {
   const {
-    data: { homePage },
+    data: { homePage, blogIndex },
   } = await client.query({
     query: gql`
       query FetchHomePage {
@@ -17,6 +17,10 @@ export default async function Home() {
             heroCta
           }
         }
+        blogIndex: page(slug: "blog") {
+          title
+          url
+        }
       }
     `,
   });
@@ -29,9 +33,9 @@ export default async function Home() {
       <p className="mb-8">{homePage.heroText}</p>
       <a
         className="px-4 py-2 rounded border hover:text-blue-100"
-        href={getHostOrigin() + homePage.heroCtaLink.url}
+        href={blogIndex.url}
       >
-        {homePage.heroCta}
+        {blogIndex.title}
       </a>
     </main>
   );
