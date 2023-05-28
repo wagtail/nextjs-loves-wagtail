@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import redirect, render
+from grapple.models import GraphQLImage, GraphQLStreamfield, GraphQLString, GraphQLTag
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import Tag, TaggedItemBase
@@ -11,9 +12,6 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import StreamField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
-
-from grapple.models import GraphQLString, GraphQLStreamfield, GraphQLImage, GraphQLTag
-
 
 from bakerydemo.base.blocks import BaseStreamBlock
 
@@ -170,7 +168,7 @@ class BlogIndexPage(RoutablePageMixin, Page):
     ]
 
     # Speficies that only BlogPage objects can live under this index page
-    subpage_types = ['BlogPage']
+    subpage_types = ["BlogPage"]
 
     # Defines a method to access the children of the page (e.g. BlogPage
     # objects). On the demo site we use this on the HomePage

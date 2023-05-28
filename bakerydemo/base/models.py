@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import gettext as _
+from grapple.models import GraphQLImage, GraphQLPage, GraphQLStreamfield, GraphQLString
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.admin.panels import (
@@ -24,8 +25,6 @@ from wagtail.models import (
     WorkflowMixin,
 )
 from wagtail.search import index
-
-from grapple.models import GraphQLString, GraphQLStreamfield, GraphQLImage, GraphQLPage
 
 from .blocks import BaseStreamBlock
 

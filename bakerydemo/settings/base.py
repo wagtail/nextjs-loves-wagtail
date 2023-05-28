@@ -207,10 +207,10 @@ ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "changeme")
 GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
 GRAPPLE = {
     "APPS": [
-        'base',
-        'blog',
-        'breads',
-        'locations',
+        "base",
+        "blog",
+        "breads",
+        "locations",
     ],
     "EXPOSE_GRAPHIQL": True,
 }
