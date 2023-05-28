@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "20.2.4",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
