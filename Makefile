@@ -15,6 +15,9 @@ lint-client:
 	npm run lint:css --silent
 	npm run lint:js --silent
 	npm run lint:format --silent
+	cd frontend
+	npm run lint
+	cd ..
 
 lint: lint-server lint-client
 
@@ -26,5 +29,8 @@ format-server:
 format-client:
 	npm run format
 	npm run fix:js
+	cd frontend
+	npm run format
+	cd ..
 
 format: format-server format-client
