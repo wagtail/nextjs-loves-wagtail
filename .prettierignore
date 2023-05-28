@@ -2,7 +2,8 @@
 node_modules
 venv
 .venv
-frontend
+frontend/.next
+frontend/public
 *.min.css
 # File types which Prettier supports but we don’t want auto-formatting.
 *.md
