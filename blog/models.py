@@ -72,6 +72,7 @@ class BlogPage(Page):
 
     api_fields = [
         APIField("intro"),
+        APIField("body"),
     ]
 
     search_fields = Page.search_fields + [
