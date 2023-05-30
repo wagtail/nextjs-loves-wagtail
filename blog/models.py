@@ -5,6 +5,7 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
+from wagtail.api import APIField
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
@@ -68,6 +69,10 @@ class BlogPage(Page):
             return gallery_item.image
         else:
             return None
+
+    api_fields = [
+        APIField("intro"),
+    ]
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
