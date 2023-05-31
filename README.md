@@ -374,6 +374,60 @@ npm run dev
 
 ## Integrating Wagtail and Next.js
 
+### Enabling the REST API in Wagtail
+
+Wagtail has a built-in REST API that we can use to fetch data from our Wagtail site. To enable it, we need to add `wagtail.api.v2` and `rest_framework` to our `INSTALLED_APPS` in `mysite/settings/base.py`.
+
+```python
+INSTALLED_APPS = [
+    ...
+    'wagtail.admin',
+    'wagtail.api.v2',
+    'wagtail',
+    'rest_framework',
+    ...
+]
+```
+
+Create a `mysite/api.py` file with the following content:
+
+```python
+from wagtail.api.v2.views import PagesAPIViewSet
+from wagtail.api.v2.router import WagtailAPIRouter
+from wagtail.images.api.v2.views import ImagesAPIViewSet
+from wagtail.documents.api.v2.views import DocumentsAPIViewSet
+
+# Create the router. "wagtailapi" is the URL namespace
+api_router = WagtailAPIRouter('wagtailapi')
+
+# Add the three endpoints using the "register_endpoint" method.
+# The first parameter is the name of the endpoint (such as pages, images). This
+# is used in the URL of the endpoint
+# The second parameter is the endpoint class that handles the requests
+api_router.register_endpoint('pages', PagesAPIViewSet)
+api_router.register_endpoint('images', ImagesAPIViewSet)
+api_router.register_endpoint('documents', DocumentsAPIViewSet)
+```
+
+Next, register the URLs so Django can route requests into the API by editing `mysite/urls.py`:
+
+```python
+from .api import api_router
+
+urlpatterns = [
+    ...,
+
+    path('api/v2/', api_router.urls),
+
+    ...,
+
+    # Ensure that the api_router line appears above the default Wagtail page serving route
+    re_path(r'^', include(wagtail_urls)),
+]
+```
+
+With this configuration, pages will be available at /api/v2/pages/, images at /api/v2/images/ and documents at /api/v2/documents/.
+
 ## Deployment
 
 We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).
