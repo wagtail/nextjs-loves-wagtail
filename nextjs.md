@@ -1,3 +1,21 @@
+## Your first Next.js site
+
+Like we used `wagtail start`, Next.js also has a project scaffolding command: `create-next-app`. We'll use this to create a new project:
+
+```bash
+npx create-next-app@latest --typescript --eslint --tailwind --use-npm frontend
+cd frontend
+```
+
+For all prompts, you may use the default: `src/` No, App Router Yes, custom import alias No. We create our Next.js site under `frontend`, so Wagtail and Next.js are clearly separated.
+
+All subsequent commands for the Next.js site will be within `frontend`.
+
+```bash
+# Run the development server
+npm run dev
+```
+
 # Next.js workshops
 
 Jamstack FTW!
