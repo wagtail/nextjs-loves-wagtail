@@ -372,6 +372,28 @@ All subsequent commands for the Next.js site will be within `frontend`.
 npm run dev
 ```
 
+To get started with a basic page on Next.js, you can edit `app/page.tsx`. For example, we'll change the existing content to:
+
+```tsx
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <div className="relative flex place-items-center">
+        <h1 className="text-4xl font-bold mb-8">Welcome!</h1>
+      </div>
+      <p className="mb-8">This is a website built with Next.js and Wagtail</p>
+      <a className="px-4 py-2 rounded border hover:text-blue-100" href="/blog">
+        Visit the blog
+      </a>
+    </main>
+  );
+}
+```
+
+You'll notice that the link to the blog page doesn't work yet. We'll need to create a page for it.
+
+Before that, we will go back to our Wagtail code to enable the REST API so we can use it in our frontend.
+
 ## Integrating Wagtail and Next.js
 
 ### Enabling the REST API in Wagtail
