@@ -563,6 +563,56 @@ export default async function BlogIndex() {
 
 After you save the file and reload the page, you will notice that the blog index page now uses the data from Wagtail. Great!
 
+We'll just add one more page to complete our Next.js website, which is the blog post itself. Start by creating a new `frontend/app/blog/[slug]` directory and a `frontend/app/blog/[slug]/page.tsx` file. We'll use the following code to fetch the data from Wagtail and render it on the page:
+
+```tsx
+interface BlogPage {
+  id: number;
+  meta: {
+    type: string;
+    slug: string;
+    first_published_at: string;
+  };
+  title: string;
+  intro: string;
+  body: string;
+}
+
+export default async function Blog({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) {
+  const data = await fetch(
+    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+      slug,
+      type: "blog.BlogPage",
+      fields: ["intro", "body"].join(","),
+    })}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+
+  const post: BlogPage = data.items[0];
+
+  return (
+    <main>
+      <div>
+        <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
+        <time dateTime={post.meta.first_published_at}>
+          {new Date(post.meta.first_published_at).toDateString()}
+        </time>
+        <p className="my-4">{post.intro}</p>
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
+    </main>
+  );
+}
+```
+
 ## Deployment
 
 We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).
