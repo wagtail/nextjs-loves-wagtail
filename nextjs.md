@@ -52,12 +52,9 @@ Recording 14/12 -- for reference: [20211214 Next.js 101 UK AM session.mp4](https
 - 3min, npm run dev
 - 5min, Basic project structure
 - 5min, styles
-- CSS-in-JS
 - 5min, pages
 - Making a new page
 - 15min, dynamic routing
-- Jamstack, <https://jamstack.org/>
-- Install create-next-app & create a new project: `npx create-next-app@latest --typescript --use-npm llamanext`
 - Look around folder structure
 - Get the site up and running (`npm run dev`)
 - Inspect site markup
@@ -69,38 +66,7 @@ Recording 14/12 -- for reference: [20211214 Next.js 101 UK AM session.mp4](https
 - Link & routing
 - `getStaticProps`
 
-## #1.1 Homework 
-
-Host your demo project on Vercel!
-
-- Push the `llamanext` source to GitHub
-- Go to Vercel and enable the GitHub integration
-- Create a llamanext project linking to your GitHub repository
-- Enjoy
-
-### Workshop questions
-
-- [ ] Next.js image rendering / magic CSS
-- ✅ Research <Link><a> nesting
-- This is done so the <a> tag can be given the most correct semantics
-- Or to use a custom component
-- ✅  CMS-generated paths
-- Routing with prefixes in the URL
-- Routing with dynamic path fragments (`[blog]/[category]/[slug]`)
-- pages/post/[pid]/[comment].js
-- Can you apply different types to a page depending on the URL without hardcoding the URL structure? For example, like in Wagtail, the URLs can be changed, but still retain their types.
-- Answer: [catch-all](https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes) routes similar to how Wagtail is generally set up
-- Example: <https://github.com/Frojd/Wagtail-Pipit/blob/main/%7B%7Bcookiecutter.project_name%7D%7D/frontend/pages/%5B...path%5D.js>
-- ✅  Layouts / page types in two locations
-- React-based component reuse
-- Additional layout API to preserve the state / DOM of all non-layout page content, when navigating between two pages that use the same layout
-- <https://nextjs.org/docs/basic-features/layouts>
-
 ## #2 Next.js headless builds
-
-Recording 12/01 -- recommended for people catching up [20220111 Next.js headless builds workshop - UK PM session.mp4](https://drive.google.com/file/d/1ZKgIXwE-TkMURMmmgMZL5Hgz5VuAmx-k/view?usp=sharing)
-
-Recording 11/01 [20220111 Next.js headless builds workshop - UK AM session.mp4](https://drive.google.com/file/d/15OW3p-owEV-c3IMA2os6PICzhBuLmrxp/view?usp=sharing)
 
 ### Housekeeping
 

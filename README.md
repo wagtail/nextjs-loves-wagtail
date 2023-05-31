@@ -1,5 +1,7 @@
 # Best of both worlds: Next.js ❤️ Wagtail – DjangoCon Europe 2023
 
+> Available online at [thib.me/nextjs](https://thib.me/nextjs) / [github.com/thibaudcolas/nextjs-loves-wagtail](https://github.com/thibaudcolas/nextjs-loves-wagtail).
+
 👋 welcome to our headless CMS workshop! This workshop covers:
 
 - Initial project setup: what Wagtail and Next.js are, and how to set them up
