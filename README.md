@@ -73,7 +73,7 @@ source env/bin/activate
 Use pip to install Wagtail and its dependencies:
 
 ```sh
-pip install wagtail
+pip install wagtail==5.0.1
 ```
 
 #### Generate your site
@@ -118,7 +118,7 @@ Then go to the URL given by `runserver` (in our examples we will use <http://127
 
 ![Browser screenshot of "Welcome to your new Wagtail site!" page, with teal egg above the title, and links to different resources. The page is shown inside a browswer tab, with browser URL bar at the top](tutorial_screenshots/wagtail/tutorial_1.png)
 
-You can now access the administrative area at <http://127.0.0.1:8000/admin>. Here’s what it will look like once we start adding content:
+You can now access the administrative area at <http://127.0.0.1:8000/admin> using the superuser account you created. Here’s what it will look like once we start adding content:
 
 ![Screenshot of Wagtail’s dashboard, with "Welcome to the mysite Wagtail CMS" heading, 1 page, 0 images, 0 documents. Underneath is a "Your most recent edits" section, with the Home page listed](tutorial_screenshots/wagtail/tutorial_2.png)
 
@@ -169,7 +169,7 @@ We’ll then update `home/templates/home/home_page.html` to contain the followin
 {% load wagtailcore_tags %}
 
 {% block content %}
-    <div class="intro">{{ page.intro|richtext }}</div>
+    <div class="intro">{{ page.body|richtext }}</div>
 {% endblock %}
 ```
 
@@ -238,7 +238,7 @@ In your `blog_index_page.html` file enter the following content:
 {% endblock %}
 ```
 
-We’ll explain `get_children` a bit later. Note the `pageurl` tag, which is similar to Django's `url` tag but takes a Wagtail Page object as an argument.
+Note the `pageurl` tag, which is similar to Django's `url` tag but takes a Wagtail Page object as an argument.
 
 From our public homepage <http://127.0.0.1:8000/>, click the Wagtail bird and then "Add a child page".
 
