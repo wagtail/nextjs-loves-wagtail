@@ -613,6 +613,31 @@ export default async function Blog({
 }
 ```
 
+There is one missing piece to this page, though: this page is rendered on-demand at request time. While Next.js does cache the page after the first render, this means that new pages cannot be rendered if the Wagtail server isn't running. To fix this, we can add a `generateStaticParams` function that tells Next.js what pages should be pre-rendered at build time.
+
+Add the following to the bottom of your `frontend/app/blog/[slug]/page.tsx` file:
+
+```tsx
+export async function generateStaticParams() {
+  const data = await fetch(
+    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+      type: "blog.BlogPage",
+    })}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+
+  return data.items.map((post: BlogPage) => ({
+    slug: post.meta.slug,
+  }));
+}
+```
+
+And that's it! As long as the Wagtail server is running when the Next.js website is built (with `npm run build`), all of our blog pages will be rendered at build time. This means that the Next.js pages will still work even if you stop the Wagtail server.
+
 ## Deployment
 
 We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).

@@ -43,3 +43,20 @@ export default async function Blog({
     </main>
   );
 }
+
+export async function generateStaticParams() {
+  const data = await fetch(
+    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+      type: "blog.BlogPage",
+    })}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+
+  return data.items.map((post: BlogPage) => ({
+    slug: post.meta.slug,
+  }));
+}
