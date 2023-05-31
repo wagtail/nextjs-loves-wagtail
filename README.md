@@ -13,7 +13,7 @@ Please make sure to have the following installed:
 
 - [Node.js v18 or v20](https://nodejs.org/) (also includes `npm`)
 - [Python v3.8+](https://www.python.org/) (also includes `pip`)
-- For deployment: [Vercel CLI](https://vercel.com/docs/cli)
+- For deployment: [Vercel CLI](https://vercel.com/docs/cli) (and a [Vercel account](https://vercel.com/signup))
 
 ## Introduction
 
@@ -373,3 +373,41 @@ npm run dev
 ## Integrating Wagtail and Next.js
 
 ## Deployment
+
+We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).
+
+Make sure that your Wagtail server is running. Then, run the following command to build your Next.js site:
+
+```bash
+vercel build
+```
+
+For most prompts, you may use the default:
+
+- Run `vercel pull`? Yes
+- Set up `path/to/frontend`? Yes
+- You may be asked to sign in to Vercel. Open the provided link to sign in.
+- Link to existing project? No
+- What's your project's name? Any, e.g. `nextjs-wagtail`
+- In which directory is your code located? `./`
+- Auto-detected Project Settings (Next.js):
+  > - Build Command: `next build`
+  > - Development Command: `next dev --port $PORT`
+  > - Install Command: `yarn install`, `pnpm install`, or `npm install`
+  > - Output Directory: Next.js default
+
+  Want to modify these settings? No
+
+When the build is completed, it should show something like `✅  Build Completed in .vercel/output [4s]`.
+
+Now, run the following command to deploy your Next.js site:
+
+```bash
+vercel deploy --prebuilt
+```
+
+On a successful deployment, you will be given a production URL. Open it in your browser to see your Next.js site!
+
+### Notes
+
+In this tutorial, the Next.js site is deployed as a static site. This means that the Next.js site is built once, and the built files are served to the user. If you have deployed your Wagtail site, you can use it along with the server-side rendering capabilities of Next.js to create a dynamic site that can be tailored on a per-request basis.
