@@ -354,6 +354,8 @@ All subsequent commands for the Next.js site will be within `frontend`.
 npm run dev
 ```
 
+You can visit the Next.js website by accessing https://localhost:3000.
+
 To get started with a basic page on Next.js, you can edit `app/page.tsx`. For example, we'll change the existing content to:
 
 ```tsx
@@ -467,6 +469,68 @@ class BlogPage(Page):
 ```
 
 You will now be able to fetch the pages data through the REST API. For an example query, try visiting http://localhost:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body on your web browser.
+
+### Fetching data from the Wagtail API in the Next.js frontend
+
+We will add a new page to our Next.js site. To do so, create a new `frontend/app/blog` directory and a `frontend/app/blog/page.tsx` inside it.
+
+We'll start off with the following content:
+
+```tsx
+export default async function BlogIndex() {
+  const posts = [
+    {
+      id: 1,
+      title: "First post",
+      intro: "This is the first post",
+      meta: {
+        slug: "first-post",
+        first_published_at: "2022-01-011T09:00:00Z",
+      }
+    },
+    {
+      id: 2,
+      title: "Second post",
+      intro: "This is the second post",
+      meta: {
+        slug: "first-post",
+        first_published_at: "2021-01-011T09:00:00Z",
+      }
+    },
+  ];
+
+  return (
+    <main>
+      <div className="mb-8">
+        <h1>Title</h1>
+        <p>Some introduction</p>
+      </div>
+      <ul>
+        {posts.map((child) => (
+          <li key={child.id} className="mb-4">
+            <a href={child.meta.slug}>
+              <h2>{child.title}</h2>
+            </a>
+            <time dateTime={child.meta.first_published_at}>
+              {new Date(child.meta.first_published_at).toDateString()}
+            </time>
+            <p>{child.intro}</p>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}
+```
+
+You can access the page by going to https://localhost:3000/blog. The blog link on the home page of your Next.js website should now also work.
+
+Note that the data is still a placeholder and hardcoded in the Next.js code. We will now continue by integrating the page with Wagtail's REST API.
+
+To do so, we can change the `posts` definition with the following:
+
+```tsx
+```
 
 ## Deployment
 
