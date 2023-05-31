@@ -46,24 +46,6 @@ db.sqlite3
 
 ### Install and run Wagtail
 
-#### Install dependencies
-
-To check whether you have an appropriate version of Python 3:
-
-```sh
-# On Windows with cmd.exe:
-py --version
-# On other platforms (WSL, Cygwin, GNU/Linux, macOS):
-python --version
-```
-
-If this does not return a version number or returns a version lower than 3.7, you will need to [install Python 3](https://www.python.org/downloads/).
-
-> 🚧 Note!
-> Before installing Wagtail, it is necessary to install the **libjpeg** and **zlib** libraries, which provide support for working with JPEG, PNG, and GIF images (via the Python **Pillow** library).
->
-> The way to do this varies by platform—see Pillow's [platform-specific installation instructions](https://pillow.readthedocs.io/en/stable/installation.html#external-libraries).
-
 #### Create and activate a virtual environment
 
 We recommend using a virtual environment, which isolates installed dependencies from other projects. We use [`venv`](https://docs.python.org/3/tutorial/venv.html), which is packaged with Python 3.
