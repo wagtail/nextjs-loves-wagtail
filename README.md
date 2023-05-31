@@ -426,7 +426,43 @@ urlpatterns = [
 ]
 ```
 
-With this configuration, pages will be available at /api/v2/pages/, images at /api/v2/images/ and documents at /api/v2/documents/.
+With this configuration, pages will be available at `/api/v2/pages/`, images at `/api/v2/images/` and documents at `/api/v2/documents/`.
+
+### Adding API fields to the Wagtail page models
+
+Wagtail only exposes some fields of the base Page model by default. In order to use the fields we defined earlier, we'll need to add them to the API. This can be done by adding an `api_fields` attribute to the model.
+
+For example, in `blog/models.py`, add the following:
+
+```python
+...
+from wagtail.api import APIField
+...
+
+
+class BlogIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    api_fields = [
+        APIField('intro'),
+    ]
+
+    ...
+
+...
+
+class BlogPage(Page):
+    date = models.DateField("Post date")
+    intro = models.CharField(max_length=250)
+    body = RichTextField(blank=True)
+
+    api_fields = [
+        APIField('intro'),
+        APIField('body'),
+    ]
+```
+
+You will now be able to fetch the pages data through the REST API. For an example query, try visiting http://localhost:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body on your web browser.
 
 ## Deployment
 
