@@ -354,7 +354,7 @@ All subsequent commands for the Next.js site will be within `frontend`.
 npm run dev
 ```
 
-You can visit the Next.js website by accessing https://localhost:3000.
+You can visit the Next.js website by accessing http://localhost:3000.
 
 To get started with a basic page on Next.js, you can edit `app/page.tsx`. For example, we'll change the existing content to:
 
@@ -363,9 +363,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <div className="relative flex place-items-center">
-        <h1 className="text-4xl font-bold mb-8">Welcome!</h1>
+        <h1 className="text-4xl font-bold mb-8">Welcome! 🎉</h1>
       </div>
-      <p className="mb-8">This is a website built with Next.js and Wagtail</p>
+      <p className="mb-8">This is a website built with Next.js and Wagtail 🐦</p>
       <a className="px-4 py-2 rounded border hover:text-blue-100" href="/blog">
         Visit the blog
       </a>
@@ -420,7 +420,9 @@ Next, register the URLs so Django can route requests into the API by editing `my
 ```python
 from .api import api_router
 
-urlpatterns = [
+...
+
+urlpatterns = urlpatterns + [
     ...,
 
     path('api/v2/', api_router.urls),
@@ -432,7 +434,7 @@ urlpatterns = [
 ]
 ```
 
-With this configuration, pages will be available at `/api/v2/pages/`, images at `/api/v2/images/` and documents at `/api/v2/documents/`.
+With this configuration, pages will be available at `/api/v2/pages/`.
 
 ### Adding API fields to the Wagtail page models
 
@@ -523,7 +525,7 @@ export default async function BlogIndex() {
 }
 ```
 
-You can access the page by going to https://localhost:3000/blog. The blog link on the home page of your Next.js website should now also work.
+You can access the page by going to http://localhost:3000/blog. The blog link on the home page of your Next.js website should now also work.
 
 Note that the data is still a placeholder and hardcoded in the Next.js code. We will now continue by integrating the page with Wagtail's REST API.
 
