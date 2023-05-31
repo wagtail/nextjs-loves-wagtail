@@ -372,6 +372,8 @@ npm run dev
 
 ## Integrating Wagtail and Next.js
 
+
+
 ## Deployment
 
 We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).
@@ -395,8 +397,7 @@ For most prompts, you may use the default:
   > - Development Command: `next dev --port $PORT`
   > - Install Command: `yarn install`, `pnpm install`, or `npm install`
   > - Output Directory: Next.js default
-
-  Want to modify these settings? No
+- Want to modify these settings? No
 
 When the build is completed, it should show something like `✅  Build Completed in .vercel/output [4s]`.
 
