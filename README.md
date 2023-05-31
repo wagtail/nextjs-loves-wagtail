@@ -508,7 +508,7 @@ export default async function BlogIndex() {
       <ul>
         {posts.map((child) => (
           <li key={child.id} className="mb-4">
-            <a href={child.meta.slug}>
+            <a href={`blog/${child.meta.slug}`}>
               <h2>{child.title}</h2>
             </a>
             <time dateTime={child.meta.first_published_at}>
@@ -530,7 +530,38 @@ Note that the data is still a placeholder and hardcoded in the Next.js code. We 
 To do so, we can change the `posts` definition with the following:
 
 ```tsx
+interface BlogPage {
+  id: number;
+  meta: {
+    type: string;
+    slug: string;
+    first_published_at: string;
+  };
+  title: string;
+  intro: string;
+}
+
+export default async function BlogIndex() {
+  const data = await fetch(
+    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+      type: "blog.BlogPage",
+      fields: "intro",
+    })}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+
+  const posts: BlogPage[] = data.items;
+
+  // The rest stays the same
+  // ...
+}
 ```
+
+After you save the file and reload the page, you will notice that the blog index page now uses the data from Wagtail. Great!
 
 ## Deployment
 
