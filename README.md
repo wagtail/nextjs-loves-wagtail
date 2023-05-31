@@ -19,7 +19,7 @@ Please make sure to have the following installed:
 
 - Requirements (see above)
 - [Wagtail](https://wagtail.org/) as a CMS: Django, content models, admin.
-- [Next.js](https://nextjs.org/) as a framework: React, routing, server-side rendering, static ite generation.
+- [Next.js](https://nextjs.org/) as a framework: React, routing, server-side rendering, static site generation.
 
 All following sections are self-directed! If you have any questions, please raise your hand or ask in the chat.
 
@@ -35,8 +35,10 @@ cd myproject
 If you want to use version control, this is a good time to `git init` a new repository. Here is the `.gitignore` contents we recommend:
 
 ```text
+__pycache__
 env
 db.sqlite3
+/media
 /static
 ```
 
@@ -92,7 +94,7 @@ pip install wagtail
 
 #### Generate your site
 
-Wagtail provides a `start` command based on `dj startproject`. It will generate a new project with a few Wagtail-specific extras, including the required project settings, a "home" app with a blank `HomePage` model and basic templates, and a sample "search" app.
+Wagtail provides a `start` command based on `django-admin startproject`. It will generate a new project with a few Wagtail-specific extras, including the required project settings, a "home" app with a blank `HomePage` model and basic templates, and a sample "search" app.
 
 Run `wagtail start` with a project name (we chose `mysite`, you can choose `myproject`, or something else altogether) and the current directory (`.`):
 
@@ -187,13 +189,9 @@ We’ll then update `home/templates/home/home_page.html` to contain the followin
 {% endblock %}
 ```
 
-We use the `richtext` filter from [Wagtail’s template tags & filters](https://docs.wagtail.org/en/stable/topics/writing_templates.html#template-tags-filters) to escape and print the contents of the `RichTextField`.
+In the above code, we load [Wagtail’s template tags & filters](https://docs.wagtail.org/en/stable/topics/writing_templates.html#template-tags-filters) using `{% load wagtailcore_tags %}`. This allows the use of the `richtext` filter to escape and print the contents of the `RichTextField`.
 
 ![Screenshot of an almost empty page – white background, "Welcome to our new site!" in the top left, and Wagtail logo in circled cyan in the bottom right](tutorial_screenshots/wagtail/tutorial_3.png)
-
-#### Wagtail template tags
-
-In addition to Django's [template tags and filters](https://docs.djangoproject.com/en/stable/ref/templates/builtins/),
 
 ### A basic blog
 
