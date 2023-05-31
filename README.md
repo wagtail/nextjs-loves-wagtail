@@ -374,8 +374,6 @@ npm run dev
 
 ## Integrating Wagtail and Next.js
 
-
-
 ## Deployment
 
 We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).
@@ -414,3 +412,15 @@ On a successful deployment, you will be given a production URL. Open it in your 
 ### Notes
 
 In this tutorial, the Next.js site is deployed as a static site. This means that the Next.js site is built once, and the built files are served to the user. If you have deployed your Wagtail site, you can use it along with the server-side rendering capabilities of Next.js to create a dynamic site that can be tailored on a per-request basis.
+
+## Resources
+
+- [Official Wagtail documentation](https://docs.wagtail.org)
+- [Official Next.js documentation](https://nextjs.org/docs)
+- Wagtail demo: [bakerydemo site](https://github.com/wagtail/bakerydemo)
+- Wagtail hosting: [Fly.io Wagtail tutorial](https://usher.dev/posts/wagtail-on-flyio/part-1/)
+- Wagtail headless: [Are we headless yet?](https://areweheadlessyet.wagtail.org/)
+- Wagtail + Next.js boilerplate: [Pipit](https://github.com/Frojd/Wagtail-Pipit)
+- Graphene (GraphQL) for Wagtail: [Wagtail Grapple](https://github.com/torchbox/wagtail-grapple)
+- Stawberry (GraphQL) for Wagtail: [Strawberry Wagtail (experimental)](https://github.com/patrick91/strawberry-wagtail)
+- Next.js utilities for Wagtail: [NextJS Wagtail (experimental)](https://gitlab.com/thelabnyc/nextjs-wagtail)
