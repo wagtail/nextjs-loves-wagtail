@@ -365,7 +365,9 @@ export default function Home() {
       <div className="relative flex place-items-center">
         <h1 className="text-4xl font-bold mb-8">Welcome! 🎉</h1>
       </div>
-      <p className="mb-8">This is a website built with Next.js and Wagtail 🐦</p>
+      <p className="mb-8">
+        This is a website built with Next.js and Wagtail 🐦
+      </p>
       <a className="px-4 py-2 rounded border hover:text-blue-100" href="/blog">
         Visit the blog
       </a>
@@ -488,7 +490,7 @@ export default async function BlogIndex() {
       meta: {
         slug: "first-post",
         first_published_at: "2022-01-011T09:00:00Z",
-      }
+      },
     },
     {
       id: 2,
@@ -497,7 +499,7 @@ export default async function BlogIndex() {
       meta: {
         slug: "first-post",
         first_published_at: "2021-01-011T09:00:00Z",
-      }
+      },
     },
   ];
 
