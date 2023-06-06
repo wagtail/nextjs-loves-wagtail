@@ -693,3 +693,12 @@ In this tutorial, the Next.js site is deployed as a static site. This means that
 - Graphene (GraphQL) for Wagtail: [Wagtail Grapple](https://github.com/torchbox/wagtail-grapple)
 - Stawberry (GraphQL) for Wagtail: [Strawberry Wagtail (experimental)](https://github.com/patrick91/strawberry-wagtail)
 - Next.js utilities for Wagtail: [NextJS Wagtail (experimental)](https://gitlab.com/thelabnyc/nextjs-wagtail)
+
+## Related
+
+For consideration as potential extensions to this workshop:
+
+- [Hosting Wagtail in fly.io](https://usher.dev/posts/wagtail-on-flyio/part-1/)
+- Wagtail Space 2022: [Wagtail headless and Next.js frontend - talk](https://www.youtube.com/watch?v=s8cJhFtjqZA), [Wagtail headless and Next.js frontend - code](https://github.com/lucasmoeskops/nextjsbakerydemo)
+- [@Morsey187 GraphQL bakerydemo](https://github.com/wagtail/bakerydemo/compare/main...Morsey187:bakerydemo:main)
+- [@thibaudcolas GraphQL bakerydemo](https://github.com/thibaudcolas/bakerydemo/commit/c39421c98bb5da183e9c8f728611d7d89bc162f9)
