@@ -2,12 +2,13 @@
 
 > Available online at [wagtail.org/nextjs-djangocon](https://wagtail.org/nextjs-djangocon) / [github.com/thibaudcolas/nextjs-loves-wagtail](https://github.com/thibaudcolas/nextjs-loves-wagtail).
 
-👋 welcome to our headless CMS workshop! This workshop covers:
+👋 welcome to a self-paced headless CMS workshop! This workshop covers:
 
 - Initial project setup: what Wagtail and Next.js are, and how to set them up
 - Connecting Next.js with the backend
-- Implementing common website requirements with this architecture
 - Deployment!
+
+The workshop was created for DjangoCon Europe 2023 by [@laymonage](https://github.com/laymonage) and [@thibaudcolas](https://github.com/thibaudcolas) – but we expect it can all be done on your own anytime.
 
 ## Ahead of the workshop
 
@@ -354,7 +355,7 @@ All subsequent commands for the Next.js site will be within `frontend`.
 npm run dev
 ```
 
-You can visit the Next.js website by accessing http://localhost:3000.
+You can visit the Next.js website by accessing <http://localhost:3000>.
 
 To get started with a basic page on Next.js, you can edit `app/page.tsx`. For example, we'll change the existing content to:
 
@@ -472,7 +473,7 @@ class BlogPage(Page):
     ]
 ```
 
-You will now be able to fetch the pages data through the REST API. For an example query, try visiting http://localhost:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body on your web browser.
+You will now be able to fetch the pages data through the REST API. For an example query, try visiting <http://localhost:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body> on your web browser.
 
 ### Fetching data from the Wagtail API in the Next.js frontend
 
@@ -527,7 +528,7 @@ export default async function BlogIndex() {
 }
 ```
 
-You can access the page by going to http://localhost:3000/blog. The blog link on the home page of your Next.js website should now also work.
+You can access the page by going to <http://localhost:3000/blog>. The blog link on the home page of your Next.js website should now also work.
 
 Note that the data is still a placeholder and hardcoded in the Next.js code. We will now continue by integrating the page with Wagtail's REST API.
 
@@ -547,7 +548,7 @@ interface BlogPage {
 
 export default async function BlogIndex() {
   const data = await fetch(
-    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+    `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogPage",
       fields: "intro",
     })}`,
@@ -588,7 +589,7 @@ export default async function Blog({
   params: { slug: string };
 }) {
   const data = await fetch(
-    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+    `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       slug,
       type: "blog.BlogPage",
       fields: ["intro", "body"].join(","),
@@ -624,7 +625,7 @@ Add the following to the bottom of your `frontend/app/blog/[slug]/page.tsx` file
 ```tsx
 export async function generateStaticParams() {
   const data = await fetch(
-    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+    `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogPage",
     })}`,
     {
