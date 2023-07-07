@@ -270,6 +270,7 @@ class BlogIndexPage(Page):
 
 
 class BlogPage(Page):
+    # Different from the real publication date, for editorial control.
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
@@ -700,5 +701,6 @@ For consideration as potential extensions to this workshop:
 
 - [Hosting Wagtail in fly.io](https://usher.dev/posts/wagtail-on-flyio/part-1/)
 - Wagtail Space 2022: [Wagtail headless and Next.js frontend - talk](https://www.youtube.com/watch?v=s8cJhFtjqZA), [Wagtail headless and Next.js frontend - code](https://github.com/lucasmoeskops/nextjsbakerydemo)
+- [Our own GraphQL bakerydemo](https://github.com/thibaudcolas/nextjs-loves-wagtail/tree/bakerydemo)
 - [@Morsey187 GraphQL bakerydemo](https://github.com/wagtail/bakerydemo/compare/main...Morsey187:bakerydemo:main)
 - [@thibaudcolas GraphQL bakerydemo](https://github.com/thibaudcolas/bakerydemo/commit/c39421c98bb5da183e9c8f728611d7d89bc162f9)
