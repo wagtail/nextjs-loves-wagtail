@@ -1,6 +1,6 @@
-# Best of both worlds: Next.js ❤️ Wagtail – DjangoCon Europe 2023
+# Best of both worlds tutorial: Next.js ❤️ Wagtail
 
-> Available online at [wagtail.org/nextjs-djangocon](https://wagtail.org/nextjs-djangocon) / [github.com/thibaudcolas/nextjs-loves-wagtail](https://github.com/thibaudcolas/nextjs-loves-wagtail).
+> Available online at [wagtail.org/nextjs-djangocon](https://wagtail.org/nextjs-djangocon) / [github.com/wagtail/nextjs-loves-wagtail](https://github.com/wagtail/nextjs-loves-wagtail).
 
 👋 welcome to a self-paced headless CMS workshop! This workshop covers:
 
@@ -8,7 +8,7 @@
 - Connecting Next.js with the backend
 - Deployment!
 
-The workshop was created for DjangoCon Europe 2023 by [@laymonage](https://github.com/laymonage) and [@thibaudcolas](https://github.com/thibaudcolas) – but we expect it can all be done on your own anytime.
+The workshop was created for live sessions with a mentor – but we expect it can all be done on your own anytime.
 
 ## Ahead of the workshop
 
@@ -701,6 +701,10 @@ For consideration as potential extensions to this workshop:
 
 - [Hosting Wagtail in fly.io](https://usher.dev/posts/wagtail-on-flyio/part-1/)
 - Wagtail Space 2022: [Wagtail headless and Next.js frontend - talk](https://www.youtube.com/watch?v=s8cJhFtjqZA), [Wagtail headless and Next.js frontend - code](https://github.com/lucasmoeskops/nextjsbakerydemo)
-- [Our own GraphQL bakerydemo](https://github.com/thibaudcolas/nextjs-loves-wagtail/tree/bakerydemo)
+- [Our own GraphQL bakerydemo](https://github.com/wagtail/nextjs-loves-wagtail/tree/bakerydemo)
 - [@Morsey187 GraphQL bakerydemo](https://github.com/wagtail/bakerydemo/compare/main...Morsey187:bakerydemo:main)
 - [@thibaudcolas GraphQL bakerydemo](https://github.com/thibaudcolas/bakerydemo/commit/c39421c98bb5da183e9c8f728611d7d89bc162f9)
+
+## Credits
+
+The workshop was initially created for DjangoCon Europe 2023 by [@laymonage](https://github.com/laymonage) and [@thibaudcolas](https://github.com/thibaudcolas). [@vossisboss](https://github.com/vossisboss) also runs the workshop online.
