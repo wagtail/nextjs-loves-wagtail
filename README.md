@@ -268,6 +268,9 @@ class BlogIndexPage(Page):
         FieldPanel('intro')
     ]
 
+    # Only allow BlogPages beneath this page.
+    subpage_types = ["blog.BlogPage"]
+
 
 class BlogPage(Page):
     # Different from the real publication date, for editorial control.
@@ -285,6 +288,9 @@ class BlogPage(Page):
         FieldPanel('intro'),
         FieldPanel('body'),
     ]
+
+    # Only allow this page to be created beneath a BlogIndexPage.
+    parent_page_types = ["blog.BlogIndexPage"]
 ```
 
 In the model above, we import `index` as this makes the model searchable. You can then list fields that you want to be searchable for the user.
@@ -320,11 +326,11 @@ Now add the following content to your newly created `blog_page.html` file:
 Note the use of Wagtail's built-in `get_parent()` method to obtain the
 URL of the blog this post is a part of.
 
-From <http://127.0.0.1:8000/blog/>, click "Add a child page" again, and this time create a new "Blog Page".
+From <http://127.0.0.1:8000/blog/>, click "Add a child page" again, and this will automatically create a new blog page for you.
 
 Wagtail gives you full control over what kinds of content can be created under
 various parent content types. By default, any page type can be a child of any
-other page type.
+other page type. We added some code to automatically create a child page that matches the parent page because it makes the user experience a little cleaner and keeps editors from selecting the wrong page type.
 
 ![Page editor for "First blog post" page, with Post date, Intro, Body fields](tutorial_screenshots/wagtail/tutorial_5.png)
 

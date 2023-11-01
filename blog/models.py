@@ -46,6 +46,9 @@ class BlogIndexPage(Page):
         blogpages = self.get_children().live().order_by('-first_published_at')
         context['blogpages'] = blogpages
         return context
+    
+    # Only allow BlogPages beneath this page.
+    subpage_types = ["blog.BlogPage"]
 
 
 class BlogPageTag(TaggedItemBase):
@@ -90,6 +93,9 @@ class BlogPage(Page):
         FieldPanel('body'),
         InlinePanel('gallery_images', label="Gallery images"),
     ]
+
+    # Only allow this page to be created beneath a BlogIndexPage.
+    parent_page_types = ["blog.BlogIndexPage"]
 
 
 class BlogPageGalleryImage(Orderable):
