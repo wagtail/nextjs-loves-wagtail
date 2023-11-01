@@ -700,6 +700,8 @@ In this tutorial, the Next.js site is deployed as a static site. This means that
 - Graphene (GraphQL) for Wagtail: [Wagtail Grapple](https://github.com/torchbox/wagtail-grapple)
 - Stawberry (GraphQL) for Wagtail: [Strawberry Wagtail (experimental)](https://github.com/patrick91/strawberry-wagtail)
 - Next.js utilities for Wagtail: [NextJS Wagtail (experimental)](https://gitlab.com/thelabnyc/nextjs-wagtail)
+- [Configuring custom domains on Vercel](https://vercel.com/docs/projects/domains/add-a-domain)
+- [Example urlpatterns configuration for headless Django](https://gist.github.com/vossisboss/a4c452a266a0d72c14edcf8cc05d1f7b)
 
 ## Related
 
