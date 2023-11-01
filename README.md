@@ -74,7 +74,7 @@ source env/bin/activate
 Use pip to install Wagtail and its dependencies:
 
 ```sh
-pip install wagtail==5.0.1
+pip install wagtail==5.2
 ```
 
 #### Generate your site
