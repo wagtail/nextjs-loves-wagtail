@@ -515,8 +515,8 @@ export default async function BlogIndex() {
   return (
     <main>
       <div className="mb-8">
-        <h1>Title</h1>
-        <p>Some introduction</p>
+        <h1 className="text-4xl font-bold mb-2">Blog</h1>
+        <div><p>Some introduction</p></div>
       </div>
       <ul>
         {posts.map((child) => (
@@ -543,6 +543,11 @@ Note that the data is still a placeholder and hardcoded in the Next.js code. We 
 To do so, we can change the `posts` definition with the following:
 
 ```tsx
+interface BlogIndexPage {
+  title: string;
+  intro: string;
+}
+
 interface BlogPage {
   id: number;
   meta: {
@@ -554,6 +559,20 @@ interface BlogPage {
 }
 
 export default async function BlogIndex() {
+  const indexPages = await fetch(
+    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+      type: "blog.BlogIndexPage",
+      fields: "intro",
+    })}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+
+  const index: BlogIndexPage = indexPages.items[0];
+
   const data = await fetch(
     `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogPage",
@@ -568,8 +587,17 @@ export default async function BlogIndex() {
 
   const posts: BlogPage[] = data.items;
 
-  // The rest stays the same
-  // ...
+  return (
+    <main>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div>
+      </div>
+
+      // The rest stays the same
+      // ...
+    </main>
+  );
 }
 ```
 
