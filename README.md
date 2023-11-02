@@ -74,7 +74,7 @@ source env/bin/activate
 Use pip to install Wagtail and its dependencies:
 
 ```sh
-pip install wagtail==5.0.1
+pip install wagtail==5.2
 ```
 
 #### Generate your site
@@ -268,6 +268,9 @@ class BlogIndexPage(Page):
         FieldPanel('intro')
     ]
 
+    # Only allow BlogPages beneath this page.
+    subpage_types = ["blog.BlogPage"]
+
 
 class BlogPage(Page):
     # Different from the real publication date, for editorial control.
@@ -285,6 +288,9 @@ class BlogPage(Page):
         FieldPanel('intro'),
         FieldPanel('body'),
     ]
+
+    # Only allow this page to be created beneath a BlogIndexPage.
+    parent_page_types = ["blog.BlogIndexPage"]
 ```
 
 In the model above, we import `index` as this makes the model searchable. You can then list fields that you want to be searchable for the user.
@@ -320,11 +326,11 @@ Now add the following content to your newly created `blog_page.html` file:
 Note the use of Wagtail's built-in `get_parent()` method to obtain the
 URL of the blog this post is a part of.
 
-From <http://127.0.0.1:8000/blog/>, click "Add a child page" again, and this time create a new "Blog Page".
+From <http://127.0.0.1:8000/blog/>, click "Add a child page" again, and this time the "Blog Page" type will automatically be selected.
 
 Wagtail gives you full control over what kinds of content can be created under
 various parent content types. By default, any page type can be a child of any
-other page type.
+other page type. We updated the models so that `BlogPage` is automatically selected when creating a page under a `BlogIndexPage`, and we disallowed the creation of a `BlogPage` under other page types. This makes the user experience more seamless and prevents editors from selecting the wrong page type.
 
 ![Page editor for "First blog post" page, with Post date, Intro, Body fields](tutorial_screenshots/wagtail/tutorial_5.png)
 
@@ -694,6 +700,8 @@ In this tutorial, the Next.js site is deployed as a static site. This means that
 - Graphene (GraphQL) for Wagtail: [Wagtail Grapple](https://github.com/torchbox/wagtail-grapple)
 - Stawberry (GraphQL) for Wagtail: [Strawberry Wagtail (experimental)](https://github.com/patrick91/strawberry-wagtail)
 - Next.js utilities for Wagtail: [NextJS Wagtail (experimental)](https://gitlab.com/thelabnyc/nextjs-wagtail)
+- [Configuring custom domains on Vercel](https://vercel.com/docs/projects/domains/add-a-domain)
+- [Example urlpatterns configuration for headless Django](https://gist.github.com/vossisboss/a4c452a266a0d72c14edcf8cc05d1f7b)
 
 ## Related
 
