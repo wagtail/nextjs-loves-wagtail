@@ -246,7 +246,7 @@ From our public homepage <http://127.0.0.1:8000/>, click the Wagtail bird and th
 - Choose "Blog index page" from the list of the page types. If Wagtail shows a 404 – you forgot to make & run migrations!
 - Use "Our Blog" as your page title, make sure it has the slug "blog" on the Promote tab, and publish it.
 
-You should now be able to access the url <http://127.0.0.1:8000/blog/> on your site (note how the slug from the Promote tab defines the page URL). If there is a `TemplateDoesNotExist` exception, it means the template is missing or isn’t being picked up by Django.
+You should now be able to access the url <http://127.0.0.1:8000/blog/> on your site (note how the slug from the Promote tab defines the page URL). If there is a `TemplateDoesNotExist` exception, it means the template is missing or isn’t being picked up by Django. You may need to reload the server so that Django picks up the new template.
 
 #### Blog posts
 
