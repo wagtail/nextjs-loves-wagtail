@@ -362,7 +362,7 @@ All subsequent commands for the Next.js site will be within `frontend`.
 npm run dev
 ```
 
-You can visit the Next.js website by accessing <http://localhost:3000>.
+You can visit the Next.js website by accessing <http://127.0.0.1:3000>.
 
 To get started with a basic page on Next.js, you can edit `app/page.tsx`. For example, we'll change the existing content to:
 
@@ -480,7 +480,7 @@ class BlogPage(Page):
     ]
 ```
 
-You will now be able to fetch the pages data through the REST API. For an example query, try visiting <http://localhost:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body> on your web browser.
+You will now be able to fetch the pages data through the REST API. For an example query, try visiting <http://127.0.0.1:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body> on your web browser.
 
 ### Fetching data from the Wagtail API in the Next.js frontend
 
@@ -535,7 +535,7 @@ export default async function BlogIndex() {
 }
 ```
 
-You can access the page by going to <http://localhost:3000/blog>. The blog link on the home page of your Next.js website should now also work.
+You can access the page by going to <http://127.0.0.1:3000/blog>. The blog link on the home page of your Next.js website should now also work.
 
 Note that the data is still a placeholder and hardcoded in the Next.js code. We will now continue by integrating the page with Wagtail's REST API.
 
