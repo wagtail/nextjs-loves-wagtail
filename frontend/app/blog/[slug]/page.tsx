@@ -15,6 +15,7 @@ export default async function Blog({
 }: {
   params: { slug: string };
 }) {
+  // Fetch the BlogPage's details based on the slug
   const data = await fetch(
     `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
       slug,
