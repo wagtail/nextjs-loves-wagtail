@@ -326,11 +326,11 @@ Now add the following content to your newly created `blog_page.html` file:
 Note the use of Wagtail's built-in `get_parent()` method to obtain the
 URL of the blog this post is a part of.
 
-From <http://127.0.0.1:8000/blog/>, click "Add a child page" again, and this will automatically create a new blog page for you.
+From <http://127.0.0.1:8000/blog/>, click "Add a child page" again, and this time the "Blog Page" type will automatically be selected.
 
 Wagtail gives you full control over what kinds of content can be created under
 various parent content types. By default, any page type can be a child of any
-other page type. We added some code to automatically create a child page that matches the parent page because it makes the user experience a little cleaner and keeps editors from selecting the wrong page type.
+other page type. We updated the models so that `BlogPage` is automatically selected when creating a page under a `BlogIndexPage`, and we disallowed the creation of a `BlogPage` under other page types. This makes the user experience more seamless and prevents editors from selecting the wrong page type.
 
 ![Page editor for "First blog post" page, with Post date, Intro, Body fields](tutorial_screenshots/wagtail/tutorial_5.png)
 
