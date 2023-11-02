@@ -1,19 +1,18 @@
 interface BlogPage {
   id: number;
   meta: {
-    type: string;
     slug: string;
-    first_published_at: string;
   };
   title: string;
+  date: string;
   intro: string;
 }
 
 export default async function BlogIndex() {
   const data = await fetch(
-    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+    `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogPage",
-      fields: "intro",
+      fields: ["date", "intro"].join(","),
     })}`,
     {
       headers: {
@@ -36,8 +35,8 @@ export default async function BlogIndex() {
             <a className="underline" href={`blog/${child.meta.slug}`}>
               <h2>{child.title}</h2>
             </a>
-            <time dateTime={child.meta.first_published_at}>
-              {new Date(child.meta.first_published_at).toDateString()}
+            <time dateTime={child.date}>
+              {new Date(child.date).toDateString()}
             </time>
             <p>{child.intro}</p>
           </li>
