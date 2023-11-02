@@ -520,7 +520,7 @@ export default async function BlogIndex() {
       <ul>
         {posts.map((child) => (
           <li key={child.id} className="mb-4">
-            <a href={`blog/${child.meta.slug}`}>
+            <a className="underline" href={`blog/${child.meta.slug}`}>
               <h2>{child.title}</h2>
             </a>
             <time dateTime={child.meta.first_published_at}>
