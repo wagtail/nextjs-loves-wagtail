@@ -384,7 +384,7 @@ export default function Home() {
 }
 ```
 
-You'll notice that the link to the blog page doesn't work yet. We'll need to create a page for it.
+You'll notice that the link to the blog page doesn't work yet. We'll need to create a Next.js page for it.
 
 Before that, we will go back to our Wagtail code to enable the REST API so we can use it in our frontend.
 
@@ -440,7 +440,7 @@ urlpatterns = urlpatterns + [
     ...,
 
     # Ensure that the api_router line appears above the default Wagtail page serving route
-    re_path(r'^', include(wagtail_urls)),
+    path("", include(wagtail_urls)),
 ]
 ```
 
@@ -654,6 +654,12 @@ And that's it! As long as the Wagtail server is running when the Next.js website
 
 We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).
 
+Before we start, log in to Vercel on the command line:
+
+```bash
+vercel login
+```
+
 Make sure that your Wagtail server is running. Then, run the following command to build your Next.js site:
 
 ```bash
@@ -664,7 +670,6 @@ For most prompts, you may use the default:
 
 - Run `vercel pull`? Yes
 - Set up `path/to/frontend`? Yes
-- You may be asked to sign in to Vercel. Open the provided link to sign in.
 - Link to existing project? No
 - What's your project's name? Any, e.g. `nextjs-wagtail`
 - In which directory is your code located? `./`
