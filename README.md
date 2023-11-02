@@ -475,12 +475,13 @@ class BlogPage(Page):
     body = RichTextField(blank=True)
 
     api_fields = [
+        APIField('date'),
         APIField('intro'),
         APIField('body'),
     ]
 ```
 
-You will now be able to fetch the pages data through the REST API. For an example query, try visiting <http://127.0.0.1:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body> on your web browser.
+You will now be able to fetch the pages data through the REST API. For an example query, try visiting <http://127.0.0.1:8000/api/v2/pages/?type=blog.BlogPage&fields=date,intro,body> on your web browser.
 
 ### Fetching data from the Wagtail API in the Next.js frontend
 
@@ -494,19 +495,19 @@ export default async function BlogIndex() {
     {
       id: 1,
       title: "First post",
+      date: "2022-01-01",
       intro: "This is the first post",
       meta: {
         slug: "first-post",
-        first_published_at: "2022-01-011T09:00:00Z",
       },
     },
     {
       id: 2,
       title: "Second post",
+      date: "2021-01-02",
       intro: "This is the second post",
       meta: {
         slug: "first-post",
-        first_published_at: "2021-01-011T09:00:00Z",
       },
     },
   ];
@@ -514,8 +515,8 @@ export default async function BlogIndex() {
   return (
     <main>
       <div className="mb-8">
-        <h1>Title</h1>
-        <p>Some introduction</p>
+        <h1 className="text-4xl font-bold mb-2">Blog</h1>
+        <div><p>Some introduction</p></div>
       </div>
       <ul>
         {posts.map((child) => (
@@ -523,8 +524,8 @@ export default async function BlogIndex() {
             <a className="underline" href={`blog/${child.meta.slug}`}>
               <h2>{child.title}</h2>
             </a>
-            <time dateTime={child.meta.first_published_at}>
-              {new Date(child.meta.first_published_at).toDateString()}
+            <time dateTime={child.date}>
+              {new Date(child.date).toDateString()}
             </time>
             <p>{child.intro}</p>
           </li>
@@ -542,22 +543,40 @@ Note that the data is still a placeholder and hardcoded in the Next.js code. We 
 To do so, we can change the `posts` definition with the following:
 
 ```tsx
-interface BlogPage {
-  id: number;
-  meta: {
-    type: string;
-    slug: string;
-    first_published_at: string;
-  };
+interface BlogIndexPage {
   title: string;
   intro: string;
 }
 
+interface BlogPage {
+  id: number;
+  meta: {
+    slug: string;
+  };
+  title: string;
+  date: string;
+  intro: string;
+}
+
 export default async function BlogIndex() {
+  const indexPages = await fetch(
+    `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
+      type: "blog.BlogIndexPage",
+      fields: "intro",
+    })}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+
+  const index: BlogIndexPage = indexPages.items[0];
+
   const data = await fetch(
     `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogPage",
-      fields: "intro",
+      fields: ["date", "intro"].join(","),
     })}`,
     {
       headers: {
@@ -568,8 +587,17 @@ export default async function BlogIndex() {
 
   const posts: BlogPage[] = data.items;
 
-  // The rest stays the same
-  // ...
+  return (
+    <main>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div>
+      </div>
+
+      // The rest stays the same
+      // ...
+    </main>
+  );
 }
 ```
 
@@ -581,11 +609,10 @@ We'll just add one more page to complete our Next.js website, which is the blog 
 interface BlogPage {
   id: number;
   meta: {
-    type: string;
     slug: string;
-    first_published_at: string;
   };
   title: string;
+  date: string;
   intro: string;
   body: string;
 }
@@ -599,7 +626,7 @@ export default async function Blog({
     `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       slug,
       type: "blog.BlogPage",
-      fields: ["intro", "body"].join(","),
+      fields: ["date", "intro", "body"].join(","),
     })}`,
     {
       headers: {
@@ -614,8 +641,8 @@ export default async function Blog({
     <main>
       <div>
         <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
-        <time dateTime={post.meta.first_published_at}>
-          {new Date(post.meta.first_published_at).toDateString()}
+        <time dateTime={post.date}>
+          {new Date(post.date).toDateString()}
         </time>
         <p className="my-4">{post.intro}</p>
       </div>

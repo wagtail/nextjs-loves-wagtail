@@ -1,19 +1,37 @@
-interface BlogPage {
-  id: number;
-  meta: {
-    type: string;
-    slug: string;
-    first_published_at: string;
-  };
+interface BlogIndexPage {
   title: string;
   intro: string;
 }
 
+interface BlogPage {
+  id: number;
+  meta: {
+    slug: string;
+  };
+  title: string;
+  date: string;
+  intro: string;
+}
+
 export default async function BlogIndex() {
-  const data = await fetch(
+  const indexPages = await fetch(
     `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
-      type: "blog.BlogPage",
+      type: "blog.BlogIndexPage",
       fields: "intro",
+    })}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+
+  const index: BlogIndexPage = indexPages.items[0];
+
+  const data = await fetch(
+    `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
+      type: "blog.BlogPage",
+      fields: ["date", "intro"].join(","),
     })}`,
     {
       headers: {
@@ -27,8 +45,8 @@ export default async function BlogIndex() {
   return (
     <main>
       <div className="mb-8">
-        <h1>Title</h1>
-        <p>Some introduction</p>
+        <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div>
       </div>
       <ul>
         {posts.map((child) => (
@@ -36,8 +54,8 @@ export default async function BlogIndex() {
             <a className="underline" href={`blog/${child.meta.slug}`}>
               <h2>{child.title}</h2>
             </a>
-            <time dateTime={child.meta.first_published_at}>
-              {new Date(child.meta.first_published_at).toDateString()}
+            <time dateTime={child.date}>
+              {new Date(child.date).toDateString()}
             </time>
             <p>{child.intro}</p>
           </li>
