@@ -246,7 +246,7 @@ From our public homepage <http://127.0.0.1:8000/>, click the Wagtail bird and th
 - Choose "Blog index page" from the list of the page types. If Wagtail shows a 404 – you forgot to make & run migrations!
 - Use "Our Blog" as your page title, make sure it has the slug "blog" on the Promote tab, and publish it.
 
-You should now be able to access the url <http://127.0.0.1:8000/blog/> on your site (note how the slug from the Promote tab defines the page URL). If there is a `TemplateDoesNotExist` exception, it means the template is missing or isn’t being picked up by Django. You may need to reload the server so that Django picks up the new template.
+You should now be able to access the url <http://127.0.0.1:8000/blog/> on your site (note how the slug from the Promote tab defines the page URL). If there is a `TemplateDoesNotExist` exception, it means the template is missing or isn’t being picked up by Django. You may need to restart the server so that Django picks up the new template.
 
 #### Blog posts
 
@@ -544,6 +544,7 @@ To do so, we can change the `posts` definition with the following:
 
 ```tsx
 interface BlogIndexPage {
+  id: number;
   title: string;
   intro: string;
 }
@@ -559,9 +560,11 @@ interface BlogPage {
 }
 
 export default async function BlogIndex() {
+  // Fetch the BlogIndexPage's details
   const indexPages = await fetch(
     `http://localhost:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogIndexPage",
+      slug: "blog",
       fields: "intro",
     })}`,
     {
@@ -571,11 +574,14 @@ export default async function BlogIndex() {
     }
   ).then((response) => response.json());
 
+  // There's only one with the slug "blog"
   const index: BlogIndexPage = indexPages.items[0];
 
+  // Fetch the BlogPages that are children of the BlogIndexPage instance
   const data = await fetch(
     `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogPage",
+      child_of: index.id.toString(),
       fields: ["date", "intro"].join(","),
     })}`,
     {
@@ -585,6 +591,7 @@ export default async function BlogIndex() {
     }
   ).then((response) => response.json());
 
+  // Use BlogPage instances as the posts
   const posts: BlogPage[] = data.items;
 
   return (
@@ -593,9 +600,20 @@ export default async function BlogIndex() {
         <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: index.intro }}></div>
       </div>
-
-      // The rest stays the same
-      // ...
+      {/* The rest is the same as the previous example */}
+      <ul>
+        {posts.map((child) => (
+          <li key={child.id} className="mb-4">
+            <a className="underline" href={`blog/${child.meta.slug}`}>
+              <h2>{child.title}</h2>
+            </a>
+            <time dateTime={child.date}>
+              {new Date(child.date).toDateString()}
+            </time>
+            <p>{child.intro}</p>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }
@@ -622,6 +640,7 @@ export default async function Blog({
 }: {
   params: { slug: string };
 }) {
+  // Fetch the BlogPage's details based on the slug
   const data = await fetch(
     `http://127.0.0.1:8000/api/v2/pages/?${new URLSearchParams({
       slug,
