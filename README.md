@@ -246,7 +246,7 @@ From our public homepage <http://127.0.0.1:8000/>, click the Wagtail bird and th
 - Choose "Blog index page" from the list of the page types. If Wagtail shows a 404 – you forgot to make & run migrations!
 - Use "Our Blog" as your page title, make sure it has the slug "blog" on the Promote tab, and publish it.
 
-You should now be able to access the url <http://127.0.0.1:8000/blog/> on your site (note how the slug from the Promote tab defines the page URL). If there is a `TemplateDoesNotExist` exception, it means the template is missing or isn’t being picked up by Django.
+You should now be able to access the url <http://127.0.0.1:8000/blog/> on your site (note how the slug from the Promote tab defines the page URL). If there is a `TemplateDoesNotExist` exception, it means the template is missing or isn’t being picked up by Django. You may need to reload the server so that Django picks up the new template.
 
 #### Blog posts
 
@@ -362,7 +362,7 @@ All subsequent commands for the Next.js site will be within `frontend`.
 npm run dev
 ```
 
-You can visit the Next.js website by accessing <http://localhost:3000>.
+You can visit the Next.js website by accessing <http://127.0.0.1:3000>.
 
 To get started with a basic page on Next.js, you can edit `app/page.tsx`. For example, we'll change the existing content to:
 
@@ -384,7 +384,7 @@ export default function Home() {
 }
 ```
 
-You'll notice that the link to the blog page doesn't work yet. We'll need to create a page for it.
+You'll notice that the link to the blog page doesn't work yet. We'll need to create a Next.js page for it.
 
 Before that, we will go back to our Wagtail code to enable the REST API so we can use it in our frontend.
 
@@ -440,7 +440,7 @@ urlpatterns = urlpatterns + [
     ...,
 
     # Ensure that the api_router line appears above the default Wagtail page serving route
-    re_path(r'^', include(wagtail_urls)),
+    path("", include(wagtail_urls)),
 ]
 ```
 
@@ -480,7 +480,7 @@ class BlogPage(Page):
     ]
 ```
 
-You will now be able to fetch the pages data through the REST API. For an example query, try visiting <http://localhost:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body> on your web browser.
+You will now be able to fetch the pages data through the REST API. For an example query, try visiting <http://127.0.0.1:8000/api/v2/pages/?type=blog.BlogPage&fields=intro,body> on your web browser.
 
 ### Fetching data from the Wagtail API in the Next.js frontend
 
@@ -520,7 +520,7 @@ export default async function BlogIndex() {
       <ul>
         {posts.map((child) => (
           <li key={child.id} className="mb-4">
-            <a href={`blog/${child.meta.slug}`}>
+            <a className="underline" href={`blog/${child.meta.slug}`}>
               <h2>{child.title}</h2>
             </a>
             <time dateTime={child.meta.first_published_at}>
@@ -535,7 +535,7 @@ export default async function BlogIndex() {
 }
 ```
 
-You can access the page by going to <http://localhost:3000/blog>. The blog link on the home page of your Next.js website should now also work.
+You can access the page by going to <http://127.0.0.1:3000/blog>. The blog link on the home page of your Next.js website should now also work.
 
 Note that the data is still a placeholder and hardcoded in the Next.js code. We will now continue by integrating the page with Wagtail's REST API.
 
@@ -654,6 +654,12 @@ And that's it! As long as the Wagtail server is running when the Next.js website
 
 We will deploy our Next.js site as a static site on Vercel. Our Wagtail site will not be deployed in this workshop, but you can deploy it by [following the documentation](https://docs.wagtail.org/en/stable/advanced_topics/deploying.html).
 
+Before we start, log in to Vercel on the command line:
+
+```bash
+vercel login
+```
+
 Make sure that your Wagtail server is running. Then, run the following command to build your Next.js site:
 
 ```bash
@@ -664,7 +670,6 @@ For most prompts, you may use the default:
 
 - Run `vercel pull`? Yes
 - Set up `path/to/frontend`? Yes
-- You may be asked to sign in to Vercel. Open the provided link to sign in.
 - Link to existing project? No
 - What's your project's name? Any, e.g. `nextjs-wagtail`
 - In which directory is your code located? `./`
